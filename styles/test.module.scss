@@ -1,0 +1,19 @@
+.oagsimg{
+   width:500px;
+   position:relative;
+   z-index: 1;
+}
+
+.blobContainer{
+   position:absolute;
+   top:0;
+   left:0;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   z-index: 2;
+}
+
+#BackBlobContainer{
+   z-index:0;
+}
