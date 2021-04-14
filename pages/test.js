@@ -9,7 +9,7 @@ export default function Test() {
    const FrontBlobs = useRef()
    const BackBlobs = useRef()
    var StopBlobs = false;
-   const parallelBlobs = 5;
+   const parallelBlobs = 4;
 
    const blobsold = [
       `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"   >
@@ -60,24 +60,30 @@ export default function Test() {
 
    const RandomlyAnimateDrop = () => {
       let anim = href.current.animate([
-         { top: 0, left: 0 },
-         { top: `${randomIntFromInterval(-50,50)}px`},
-         { top: 0, left: 0 },
+         { top: 0, transform: "rotate(0)"},
+         { top: `${randomIntFromInterval(-50, 50)}px`, transform: `rotate(${randomIntFromInterval(-3, 3)}deg) `},
+         { top: 0, transform: "rotate(0)" },
       ], { duration: 3000, easing: "ease-in-out", iterations: 1 })
 
       anim.onfinish = RandomlyAnimateDrop;
-   }  
+   }
 
    useEffect(() => {
-     
+
       RandomlyAnimateDrop();
 
+      href.current.animate([
+         {scale: 1},
+         {scale: 1.05},
+         {scale: 1},
+      ],{duration: 900, easing: "ease-in-out", iterations: Infinity})
+
       document.body.animate([
-         {backgroundColor: "#3498db"},
-         {backgroundColor: "#2980b9"},
-         {backgroundColor: "#16a085"},
-         {backgroundColor: "#3498db"},
-      ], {duration: 6000, easing:"linear", iterations: Infinity})
+         { backgroundColor: "#3498db" },
+         { backgroundColor: "#2980b9" },
+         { backgroundColor: "#169BA0" },
+         { backgroundColor: "#3498db" },
+      ], { duration: 6000, easing: "linear", iterations: Infinity })
 
       HandleBlobSpawning(parallelBlobs);
    }, [])
@@ -85,12 +91,21 @@ export default function Test() {
    //min and max are included
    const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-   const HandleBlobSpawning = (spawncount = 0) => {
-      if (spawncount > 0) {
-         spawnRandomBlob();
+   const HandleBlobSpawning = (spawncount = 1) => {
+      // if (spawncount > 0) {
+      if(StopBlobs) return;
 
-         setTimeout(() => HandleBlobSpawning(spawncount - 1), randomIntFromInterval(0, 1000));
+      spawnRandomBlob();
+
+      for(let i = 0; i < spawncount; i++){
+         if (!StopBlobs) {
+            setTimeout(HandleBlobSpawning, randomIntFromInterval(100,  randomIntFromInterval(200, 8000)))
+         }
       }
+
+      // spawnRandomBlob();
+      // setTimeout(() => {H'andleBlobSpawning(spawncount - 1)}, randomIntFromInterval(0, 1000));
+      // }
 
 
    }
@@ -106,8 +121,8 @@ export default function Test() {
       }
       else {
          toAdd = BackBlobs.current;
-         if(randomIntFromInterval(0, 99) > 90)duration = randomIntFromInterval(850, 12000)
-         else duration = randomIntFromInterval(850, 1200)
+         if (randomIntFromInterval(0, 99) > 90) duration = randomIntFromInterval(8500, 12000)
+         else duration = randomIntFromInterval(1200, 12000)
       }
       let el = document.createElement("div")
       el.innerHTML = blob;
@@ -116,9 +131,11 @@ export default function Test() {
       el.classList.add("blob")
       el.style.top = "100vh";
       el.style.left = randomIntFromInterval(0, document.body.clientWidth) + "px"
+      //el.style.scale = (1 / duration) * Math.sqrt(duration) * randomIntFromInterval(50, 100);
+      el.style.scale = (1 / duration) * Math.log(duration) * randomIntFromInterval(document.body.clientWidth*0.2, document.body.clientWidth*0.4);
       let anim = el.animate([
-      { top: "100vh" },
-      { top: -el.clientHeight + "px" }
+         { top: "100vh" },
+         { top: -el.clientHeight + "px" }
       ], { duration: duration, easing: "linear" })
 
 
@@ -126,7 +143,7 @@ export default function Test() {
 
       anim.onfinish = () => {
          el.remove();
-         !StopBlobs? setTimeout(spawnRandomBlob, randomIntFromInterval(0, 100)):null
+         // !StopBlobs? setTimeout(spawnRandomBlob, randomIntFromInterval(0, 100)):null
       }
    }
 
