@@ -20,22 +20,28 @@ export default function Test() {
       `<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.21 103.05"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M64.84,16.71H234.21a64.5,64.5,0,0,1,27.63,5.85c11.79,5.65,19.8,14.42,21.4,24.09,2.43,14.77-10.42,29.73-31.17,36.06a66,66,0,0,1-19.19,2.69H64.7a64.55,64.55,0,0,1-26.85-5.49C23.52,73.26,14.55,61.66,15.4,49.29c.54-7.74,4.88-15,11.82-20.65C36.64,20.93,50.49,16.71,64.84,16.71Z"/></svg>`
    ]
 
-   const RandomlyAnimateDrop = () => {
-      let anim = href.current.animate([
-         { top: 0, transform: "rotate(0)"},
-         { top: `${randomIntFromInterval(-50, 50)}px`, transform: `rotate(${randomIntFromInterval(-3, 3)}deg) `},
-         { top: 0, transform: "rotate(0)" },
-      ], { duration: 3000, easing: "ease-in-out", iterations: 1 })
+   // const RandomlyAnimateDrop = () => {
+   //    let anim = href.current.animate([
+   //       { top: 0, transform: "rotate(0)"},
+   //       { top: `${randomIntFromInterval(-50, 50)}px`, transform: `rotate(${randomIntFromInterval(-3, 3)}deg) `},
+   //       { top: 0, transform: "rotate(0)" },
+   //    ], { duration: 3000, easing: "ease-in-out", iterations: 1 })
 
-      anim.onfinish = RandomlyAnimateDrop;
-   }
+   //    anim.onfinish = RandomlyAnimateDrop;
+   // }
 
    useEffect(() => {
 
       window.onfocus = () => isWindowActive = true;
       window.onblur = () => isWindowActive = false;
 
-      RandomlyAnimateDrop();
+      // RandomlyAnimateDrop();
+
+      href.current.animate([
+         { top: 0},
+         { top: `50px`},
+         { top: 0},
+      ], { duration: 3000, easing: "ease-in-out", iterations: Infinity })
 
       href.current.animate([
          {scale: 1},
