@@ -1,7 +1,9 @@
 .oagsimg{
    width:500px;
+   max-width: 98vw;
    position:relative;
    z-index: 1;
+   object-fit: contain;
 }
 
 .blobContainer{

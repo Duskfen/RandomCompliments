@@ -32,14 +32,14 @@ export default function Test() {
 
       href.current.animate([
          { top: 0},
-         { top: `50px`},
+         { top: `15px`},
          { top: 0},
-      ], { duration: 3000, easing: "ease-in-out", iterations: Infinity })
+      ], { duration: 900, easing: "ease-in-out", iterations: Infinity })
 
       href.current.animate([
+         {scale: 0.95},
          {scale: 1},
-         {scale: 1.05},
-         {scale: 1},
+         {scale: 0.95},
       ],{duration: 900, easing: "ease-in-out", iterations: Infinity})
 
       document.body.animate([
