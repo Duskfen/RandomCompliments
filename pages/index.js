@@ -7,7 +7,7 @@ export default function Home() {
    return (
       <>
       <Head>
-        <title>Hetzi Liebe</title>
+        <title>Compliment</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Test />
