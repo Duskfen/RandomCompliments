@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Component, useEffect, useRef, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import teststyle from '../styles/test.module.scss'
+import Compliments from './compliments.json'
 
 
 
@@ -10,6 +11,8 @@ export default function Test() {
    const BackBlobs = useRef()
    var StopBlobs = false;
    const parallelBlobs = 4;
+   const messages = Compliments.anytime;
+   var currentmessage = useState(messages[Math.floor(Math.random() * messages.length)]);
    var isWindowActive = true;
 
    const blobs = [
@@ -19,16 +22,6 @@ export default function Test() {
       `<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.21 103.05"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M77.76,19.65h122a38,38,0,0,1,19.91,5.43c8.49,5.25,14.26,13.38,15.41,22.36,1.75,13.7-7.51,27.58-22.46,33.46a37.88,37.88,0,0,1-13.82,2.49H77.66a37.78,37.78,0,0,1-19.35-5.1C48,72.12,41.53,61.36,42.14,49.89a30.26,30.26,0,0,1,8.52-19.16C57.44,23.57,67.42,19.65,77.76,19.65Z"/></svg>`,
       `<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.21 103.05"><defs><style>.cls-1{fill:#fff;}</style></defs><path class="cls-1" d="M64.84,16.71H234.21a64.5,64.5,0,0,1,27.63,5.85c11.79,5.65,19.8,14.42,21.4,24.09,2.43,14.77-10.42,29.73-31.17,36.06a66,66,0,0,1-19.19,2.69H64.7a64.55,64.55,0,0,1-26.85-5.49C23.52,73.26,14.55,61.66,15.4,49.29c.54-7.74,4.88-15,11.82-20.65C36.64,20.93,50.49,16.71,64.84,16.71Z"/></svg>`
    ]
-
-   // const RandomlyAnimateDrop = () => {
-   //    let anim = href.current.animate([
-   //       { top: 0, transform: "rotate(0)"},
-   //       { top: `${randomIntFromInterval(-50, 50)}px`, transform: `rotate(${randomIntFromInterval(-3, 3)}deg) `},
-   //       { top: 0, transform: "rotate(0)" },
-   //    ], { duration: 3000, easing: "ease-in-out", iterations: 1 })
-
-   //    anim.onfinish = RandomlyAnimateDrop;
-   // }
 
    useEffect(() => {
 
@@ -123,7 +116,7 @@ export default function Test() {
             <div ref={FrontBlobs} className={teststyle.blobContainer}>
 
             </div>
-            <h1 className={styles.title}>Hetzi du bist ein Tropfen im Meer der Liebe</h1>
+            <h1 className={styles.title}>{currentmessage}</h1>
             <img src={"/images/drop.svg"} ref={href} className={teststyle.oagsimg}></img>
             <div ref={BackBlobs} className={teststyle.blobContainer} id={teststyle.BackBlobContainer}>
 
