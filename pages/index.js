@@ -6,11 +6,15 @@ import Test from "./test"
 export default function Home() {
    return (
       <>
-      <Head>
-        <title>Compliment</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Test />
-   </>
-  )
+         <Head>
+            <title>A Compliment</title>
+            <link rel="icon" href="/favicon.ico" />
+            <meta
+               name="description"
+               content="Because you deserve it. <3"
+            />
+         </Head>
+         <Test />
+      </>
+   )
 }

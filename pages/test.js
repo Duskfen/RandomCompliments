@@ -4,7 +4,6 @@ import teststyle from '../styles/test.module.scss'
 import Compliments from './compliments.json'
 
 
-
 export default function Test() {
    const href = useRef()
    const FrontBlobs = useRef()
@@ -12,7 +11,7 @@ export default function Test() {
    var StopBlobs = false;
    const parallelBlobs = 4;
    const messages = Compliments.anytime;
-   var currentmessage = useState(messages[Math.floor(Math.random() * messages.length)]);
+   var [currentmessage, setMessage] = useState();
    var isWindowActive = true;
 
    const blobs = [
@@ -49,8 +48,13 @@ export default function Test() {
          { backgroundColor: "#3498db" },
       ], { duration: 6000, easing: "linear", iterations: Infinity })
 
+      setMessage(messages[Math.floor(Math.random() * messages.length)])
       HandleBlobSpawning(parallelBlobs);
+
+
    }, [])
+
+
 
    //min and max are included
    const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -110,16 +114,20 @@ export default function Test() {
       }
    }
 
+   const refreshCompliment = () => setMessage(messages[Math.floor(Math.random() * messages.length)])
+
    return (
       <div className={styles.container}>
          <main className={styles.main}>
             <div ref={FrontBlobs} className={teststyle.blobContainer}>
-
             </div>
             <h1 className={styles.title}>{currentmessage}</h1>
             <img src={"/images/drop.svg"} ref={href} className={teststyle.oagsimg}></img>
             <div ref={BackBlobs} className={teststyle.blobContainer} id={teststyle.BackBlobContainer}>
+            </div>
 
+            <div className={teststyle.refresh} onClick={refreshCompliment}>
+               <img src={"/images/update.png"}></img>
             </div>
          </main>
       </div>

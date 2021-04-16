@@ -19,4 +19,6 @@ a {
 .blob{
    width:200px;
    position:absolute;
+   opacity: 0.9;
+   
 }
